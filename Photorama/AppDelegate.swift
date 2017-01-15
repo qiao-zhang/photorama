@@ -14,8 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
 
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+  func application(
+      _ application: UIApplication,
+      didFinishLaunchingWithOptions launchOptions:
+          [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+    let navController = window!.rootViewController as! UINavigationController
+    let photoListView = navController.topViewController as! PhotoListView
+    let present = PhotoListPresenter()
+    photoListView.output = present
+    present.output = photoListView
+    photoListView.router = Router.shared
+
     return true
   }
 
