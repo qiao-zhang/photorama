@@ -8,46 +8,52 @@
 
 /* Begin PBXBuildFile section */
 		DD1EB05958A2C006A9B4D2BC /* ImageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB3808A4A3430F3226996 /* ImageDataStore.swift */; };
-		DD1EB0668629E3A57E3B68CF /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBE3B95A3324040F5FF6B /* Router.swift */; };
+		DD1EB0A8E7E89EE44D72C316 /* PhotoListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB3EE01A5052840DA321F /* PhotoListRouter.swift */; };
 		DD1EB20C4CCECE011660C900 /* PhotoCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB973E719484A5F11315E /* PhotoCellPresenter.swift */; };
 		DD1EB263175C6354795D5A52 /* ImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBF50EC7378B533889842 /* ImagePresenter.swift */; };
-		DD1EB2AFCEB25DD53BA49F6B /* PhotoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB10151B8F60CCDA66866 /* PhotoListCell.swift */; };
-		DD1EB34809B066D6A3BC7671 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBF587DB9941E18669B00 /* ImageViewController.swift */; };
 		DD1EB41D46020FCE053F99D1 /* PhotoGridPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB1BA979C320680D0CE18 /* PhotoGridPresenter.swift */; };
+		DD1EB5D805631A948410B885 /* PhotoramaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB587E60F81C2AD5901E2 /* PhotoramaViewController.swift */; };
 		DD1EB5E3CF742D9612521E4E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBE69E72BC6D704982A73 /* Photo.swift */; };
 		DD1EB63505929FB3A24DF914 /* PhotoListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB388600056B8563BA163 /* PhotoListPresenter.swift */; };
 		DD1EB6847928F7238FAF0FD2 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB91D09C176F4D0DB2B19 /* FlickrAPI.swift */; };
+		DD1EB760DCCE46DBFB205620 /* PhotoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBBDE9F6162EEBA15051C /* PhotoListViewController.swift */; };
 		DD1EB853008A27722BF8EB1A /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB9E07AB490D2A8874B7B /* PhotoStore.swift */; };
 		DD1EB8C17BDCF52EAC988794 /* PhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB262E8601E65BC2729CF /* PhotosInteractor.swift */; };
-		DD1EB8C7D0668B599FFFB6CA /* PhotoGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB630AD6503E2C79F3B17 /* PhotoGridViewController.swift */; };
+		DD1EB8D47AB2B7F4A7A82A81 /* PhotoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB959A18E46F89F374752 /* PhotoListCell.swift */; };
+		DD1EB9FF5BFD645301C8DA7E /* PhotoGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB74EBD5FE2A1538EE00E /* PhotoGridViewController.swift */; };
 		DD1EBAA1CEAE2295F66386C8 /* ImageDataInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB9E749DB6207B7BDDAC8 /* ImageDataInteractor.swift */; };
-		DD1EBAAB4C861C906275E274 /* PhotoramaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBED8A0BD0A2F781EA1F8 /* PhotoramaViewController.swift */; };
+		DD1EBAB09AA643BCA065E643 /* PhotoGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB6D2DB6675602A3146D5 /* PhotoGridCell.swift */; };
+		DD1EBB2754C3C37FCF43F281 /* PhotoGridRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB2E2B7EBF24693BD1277 /* PhotoGridRouter.swift */; };
+		DD1EBD6494C10D1806E56AF1 /* PhotoramaRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB41095B51D861197AB31 /* PhotoramaRouter.swift */; };
+		DD1EBF64F6CED3A2A96DA463 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB3130AAE102624B3FF6B /* ImageViewController.swift */; };
 		E7D3D01B1E26B70200766514 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D3D01A1E26B70200766514 /* AppDelegate.swift */; };
-		E7D3D01D1E26B70200766514 /* PhotoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D3D01C1E26B70200766514 /* PhotoListViewController.swift */; };
 		E7D3D0201E26B70200766514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D3D01E1E26B70200766514 /* Main.storyboard */; };
 		E7D3D0221E26B70200766514 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7D3D0211E26B70200766514 /* Assets.xcassets */; };
 		E7D3D0251E26B70200766514 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D3D0231E26B70200766514 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DD1EB10151B8F60CCDA66866 /* PhotoListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListCell.swift; sourceTree = "<group>"; };
 		DD1EB1BA979C320680D0CE18 /* PhotoGridPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGridPresenter.swift; sourceTree = "<group>"; };
 		DD1EB262E8601E65BC2729CF /* PhotosInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosInteractor.swift; sourceTree = "<group>"; };
+		DD1EB2E2B7EBF24693BD1277 /* PhotoGridRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGridRouter.swift; sourceTree = "<group>"; };
+		DD1EB3130AAE102624B3FF6B /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		DD1EB3808A4A3430F3226996 /* ImageDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataStore.swift; sourceTree = "<group>"; };
 		DD1EB388600056B8563BA163 /* PhotoListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListPresenter.swift; sourceTree = "<group>"; };
-		DD1EB630AD6503E2C79F3B17 /* PhotoGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGridViewController.swift; sourceTree = "<group>"; };
+		DD1EB3EE01A5052840DA321F /* PhotoListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListRouter.swift; sourceTree = "<group>"; };
+		DD1EB41095B51D861197AB31 /* PhotoramaRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoramaRouter.swift; sourceTree = "<group>"; };
+		DD1EB587E60F81C2AD5901E2 /* PhotoramaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoramaViewController.swift; sourceTree = "<group>"; };
+		DD1EB6D2DB6675602A3146D5 /* PhotoGridCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGridCell.swift; sourceTree = "<group>"; };
+		DD1EB74EBD5FE2A1538EE00E /* PhotoGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGridViewController.swift; sourceTree = "<group>"; };
 		DD1EB91D09C176F4D0DB2B19 /* FlickrAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
+		DD1EB959A18E46F89F374752 /* PhotoListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListCell.swift; sourceTree = "<group>"; };
 		DD1EB973E719484A5F11315E /* PhotoCellPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCellPresenter.swift; sourceTree = "<group>"; };
 		DD1EB9E07AB490D2A8874B7B /* PhotoStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoStore.swift; sourceTree = "<group>"; };
 		DD1EB9E749DB6207B7BDDAC8 /* ImageDataInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataInteractor.swift; sourceTree = "<group>"; };
-		DD1EBE3B95A3324040F5FF6B /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		DD1EBBDE9F6162EEBA15051C /* PhotoListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListViewController.swift; sourceTree = "<group>"; };
 		DD1EBE69E72BC6D704982A73 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		DD1EBED8A0BD0A2F781EA1F8 /* PhotoramaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoramaViewController.swift; sourceTree = "<group>"; };
 		DD1EBF50EC7378B533889842 /* ImagePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePresenter.swift; sourceTree = "<group>"; };
-		DD1EBF587DB9941E18669B00 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		E7D3D0171E26B70200766514 /* Photorama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photorama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7D3D01A1E26B70200766514 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E7D3D01C1E26B70200766514 /* PhotoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewController.swift; sourceTree = "<group>"; };
 		E7D3D01F1E26B70200766514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7D3D0211E26B70200766514 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7D3D0241E26B70200766514 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,6 +71,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD1EB66048FDA5EC191385D3 /* PhotoramaScene */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EB587E60F81C2AD5901E2 /* PhotoramaViewController.swift */,
+			);
+			name = PhotoramaScene;
+			sourceTree = "<group>";
+		};
+		DD1EBA0425014D22E86CEEFB /* PhotoGridScene */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EB74EBD5FE2A1538EE00E /* PhotoGridViewController.swift */,
+				DD1EB6D2DB6675602A3146D5 /* PhotoGridCell.swift */,
+			);
+			name = PhotoGridScene;
+			sourceTree = "<group>";
+		};
 		DD1EBD75341C1FE535236A03 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +95,33 @@
 				DD1EB9E749DB6207B7BDDAC8 /* ImageDataInteractor.swift */,
 			);
 			name = Interactor;
+			sourceTree = "<group>";
+		};
+		DD1EBE8EBB7AFCC2CA7D37A0 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EB2E2B7EBF24693BD1277 /* PhotoGridRouter.swift */,
+				DD1EB41095B51D861197AB31 /* PhotoramaRouter.swift */,
+				DD1EB3EE01A5052840DA321F /* PhotoListRouter.swift */,
+			);
+			name = Router;
+			sourceTree = "<group>";
+		};
+		DD1EBF7AC48D7F5097D1750C /* ImageScene */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EB3130AAE102624B3FF6B /* ImageViewController.swift */,
+			);
+			name = ImageScene;
+			sourceTree = "<group>";
+		};
+		DD1EBFFC4C98F10C98CF1E5E /* PhotoListScene */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EBBDE9F6162EEBA15051C /* PhotoListViewController.swift */,
+				DD1EB959A18E46F89F374752 /* PhotoListCell.swift */,
+			);
+			name = PhotoListScene;
 			sourceTree = "<group>";
 		};
 		E757358F1E2ACD49008A01FF /* Model */ = {
@@ -88,12 +138,10 @@
 		E75735901E2ACD67008A01FF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DD1EBE3B95A3324040F5FF6B /* Router.swift */,
-				E7D3D01C1E26B70200766514 /* PhotoListViewController.swift */,
-				DD1EB10151B8F60CCDA66866 /* PhotoListCell.swift */,
-				DD1EBF587DB9941E18669B00 /* ImageViewController.swift */,
-				DD1EBED8A0BD0A2F781EA1F8 /* PhotoramaViewController.swift */,
-				DD1EB630AD6503E2C79F3B17 /* PhotoGridViewController.swift */,
+				DD1EBA0425014D22E86CEEFB /* PhotoGridScene */,
+				DD1EB66048FDA5EC191385D3 /* PhotoramaScene */,
+				DD1EBFFC4C98F10C98CF1E5E /* PhotoListScene */,
+				DD1EBF7AC48D7F5097D1750C /* ImageScene */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -137,6 +185,7 @@
 				E7D3D0211E26B70200766514 /* Assets.xcassets */,
 				E7D3D0231E26B70200766514 /* LaunchScreen.storyboard */,
 				E7D3D0261E26B70200766514 /* Info.plist */,
+				DD1EBE8EBB7AFCC2CA7D37A0 /* Router */,
 			);
 			path = Photorama;
 			sourceTree = "<group>";
@@ -214,23 +263,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7D3D01D1E26B70200766514 /* PhotoListViewController.swift in Sources */,
 				E7D3D01B1E26B70200766514 /* AppDelegate.swift in Sources */,
 				DD1EB6847928F7238FAF0FD2 /* FlickrAPI.swift in Sources */,
 				DD1EB853008A27722BF8EB1A /* PhotoStore.swift in Sources */,
 				DD1EB5E3CF742D9612521E4E /* Photo.swift in Sources */,
 				DD1EB63505929FB3A24DF914 /* PhotoListPresenter.swift in Sources */,
-				DD1EB2AFCEB25DD53BA49F6B /* PhotoListCell.swift in Sources */,
 				DD1EB20C4CCECE011660C900 /* PhotoCellPresenter.swift in Sources */,
 				DD1EB05958A2C006A9B4D2BC /* ImageDataStore.swift in Sources */,
-				DD1EB34809B066D6A3BC7671 /* ImageViewController.swift in Sources */,
 				DD1EB263175C6354795D5A52 /* ImagePresenter.swift in Sources */,
-				DD1EB0668629E3A57E3B68CF /* Router.swift in Sources */,
-				DD1EBAAB4C861C906275E274 /* PhotoramaViewController.swift in Sources */,
-				DD1EB8C7D0668B599FFFB6CA /* PhotoGridViewController.swift in Sources */,
 				DD1EB8C17BDCF52EAC988794 /* PhotosInteractor.swift in Sources */,
 				DD1EB41D46020FCE053F99D1 /* PhotoGridPresenter.swift in Sources */,
 				DD1EBAA1CEAE2295F66386C8 /* ImageDataInteractor.swift in Sources */,
+				DD1EB9FF5BFD645301C8DA7E /* PhotoGridViewController.swift in Sources */,
+				DD1EBAB09AA643BCA065E643 /* PhotoGridCell.swift in Sources */,
+				DD1EBB2754C3C37FCF43F281 /* PhotoGridRouter.swift in Sources */,
+				DD1EBD6494C10D1806E56AF1 /* PhotoramaRouter.swift in Sources */,
+				DD1EB5D805631A948410B885 /* PhotoramaViewController.swift in Sources */,
+				DD1EB0A8E7E89EE44D72C316 /* PhotoListRouter.swift in Sources */,
+				DD1EB760DCCE46DBFB205620 /* PhotoListViewController.swift in Sources */,
+				DD1EB8D47AB2B7F4A7A82A81 /* PhotoListCell.swift in Sources */,
+				DD1EBF64F6CED3A2A96DA463 /* ImageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
