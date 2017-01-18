@@ -20,11 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
     let navController = window!.rootViewController as! UINavigationController
-    let photoListView = navController.topViewController as! PhotoListView
-    let present = PhotoListPresenter()
-    photoListView.output = present
-    present.output = photoListView
-    photoListView.router = Router.shared
+    let photoramaView = navController.topViewController as! PhotoramaViewController
+    photoramaView.router = Router.shared
 
     return true
   }

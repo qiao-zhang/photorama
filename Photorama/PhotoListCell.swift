@@ -5,24 +5,29 @@
 
 import UIKit
 
-protocol PhotoCellOutput {
+protocol PhotoListCellOutput {
   func loadImage(url: URL)
 }
 
-class PhotoCell: UITableViewCell, PhotoCellPresenterOutput {
+struct PhotoListCellItem {
+  let title: String
+  let imageURL: URL
+}
+
+class PhotoListCell: UITableViewCell, PhotoListCellPresenterOutput {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var thumbnail: UIImageView!
   @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-  var output: PhotoCellOutput!
+  var output: PhotoListCellOutput!
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    output = PhotoCellPresenter(output: self)
+    output = PhotoListCellPresenter(output: self)
   }
 
-  func configure(with photoCellItem: PhotoCellItem) {
-    titleLabel.text = photoCellItem.title
-    output.loadImage(url: photoCellItem.remoteURL)
+  func configure(with photoTableViewCellItem: PhotoListCellItem) {
+    titleLabel.text = photoTableViewCellItem.title
+    output.loadImage(url: photoTableViewCellItem.imageURL)
     thumbnail.image = nil
     activityIndicatorView.isHidden = false
     activityIndicatorView.startAnimating()
@@ -38,5 +43,4 @@ class PhotoCell: UITableViewCell, PhotoCellPresenterOutput {
     thumbnail.backgroundColor = UIColor.darkGray
     activityIndicatorView.isHidden = true
   }
-
 }

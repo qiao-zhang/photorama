@@ -5,16 +5,16 @@
 
 import Foundation
 
-protocol PhotoListPresenterOutput: class {
+protocol PhotoGridPresenterOutput: class {
   func showFailure()
-  func showPhotoListCells(_ photoListCellItems: [PhotoListCellItem])
+  func showPhotoGridCells(_ photoGridCellItems: [PhotoGridCellItem])
 }
 
-class PhotoListPresenter: PhotosInteractorOutput {
-  
-  unowned let output: PhotoListPresenterOutput
+class PhotoGridPresenter: PhotosInteractorOutput {
 
-  init(output: PhotoListPresenterOutput) {
+  unowned let output: PhotoGridPresenterOutput
+  
+  init(output: PhotoGridPresenterOutput) {
     self.output = output
   }
 
@@ -28,14 +28,13 @@ class PhotoListPresenter: PhotosInteractorOutput {
   }
   
   private func handlePhotos(_ photos: [Photo]) {
-    let photoListCellItems: [PhotoListCellItem] = photos.map {
-      PhotoListCellItem(title: $0.title, imageURL: $0.remoteURL)
+    let photoGridCellItems: [PhotoGridCellItem] = photos.map {
+      PhotoGridCellItem(title: $0.title, imageURL: $0.remoteURL)
     }
-    output.showPhotoListCells(photoListCellItems)
+    output.showPhotoGridCells(photoGridCellItems)
   }
   
   private func handleFailure(error: FetchPhotosError) {
     output.showFailure()
   }
-  
 }

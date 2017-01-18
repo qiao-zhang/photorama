@@ -14,7 +14,7 @@ struct ImageViewItem {
   let imageURL: URL
 }
 
-class ImageView: UIViewController, ImagePresenterOutput {
+class ImageViewController: UIViewController, ImagePresenterOutput {
   @IBOutlet weak var imageView: UIImageView!
   var item: ImageViewItem!
   var output: ImageViewOutput!

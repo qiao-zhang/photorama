@@ -64,7 +64,7 @@ extension FlickrAPI: PhotoRemoteDataSource {
   }
 
   func fetchPhotosAsync(category: PhotoCategory,
-                        completion: @escaping ([Photo]?) -> Void)
+                        completion: @escaping (FetchPhotosResult) -> Void)
           -> FetchPhotosTask {
     let url: URL
     switch category {
@@ -75,14 +75,17 @@ extension FlickrAPI: PhotoRemoteDataSource {
     }
     let request = URLRequest(url: url)
     let task = session.dataTask(with: request) { data, response, error in
-      if let jsonData = data {
-        let photos = self.photos(fromJSON: jsonData)
-        completion(photos)
-      } else if let requestError = error {
-        print("\(requestError)")
-      } else {
-        print("Unexpected error with the request")
+      
+      if let error = error {
+        return completion(.failure(.requestFailed(error)))
       }
+      
+      let jsonData = data!
+      
+      if let photos = self.photos(fromJSON: jsonData) {
+        return completion(.success(photos))
+      }
+      return completion(.failure(.jsonWrongFormat))
     }
     task.resume()
     return FetchPhotosURLSessionDataTask(task: task)

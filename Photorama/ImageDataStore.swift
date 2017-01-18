@@ -11,6 +11,10 @@ protocol ImageDataRemoteDataSource {
       completion: @escaping (Data?) -> Void) -> FetchImageDataTask?
 }
 
+protocol FetchImageDataTask {
+  func cancel()
+}
+
 struct FetchImageURLSessionDataTask: FetchImageDataTask {
   var task: URLSessionDataTask?
   func cancel() {

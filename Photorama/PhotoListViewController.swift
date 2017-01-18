@@ -1,5 +1,5 @@
 //
-//  PhotoListView.swift
+//  PhotoListViewController.swift
 //  Photorama
 //
 //  Created by Qiao Zhang on 1/11/17.
@@ -8,30 +8,31 @@
 
 import UIKit
 
-protocol PhotoListViewOutput {
-  func loadPhotoCellItems(category: PhotoCellItemCategory)
+protocol PhotoListViewControllerOutput {
+  func loadInterestingPhotoListCellItems()
+  func loadRecentPhotoListCellItems()
 }
 
-protocol PhotoListViewRouter {
-  func showImage(from photoListView: PhotoListView,
-                 for photoCellItem: PhotoCellItem)
+protocol PhotoListViewControllerRouter {
+  func showImage(from photoListViewController: PhotoListViewController,
+                 for photoTableViewCellItem: PhotoListCellItem)
   func prepare(for segue: UIStoryboardSegue,
-               from source: PhotoListView,
-               with sender: Any?)
+               from _: PhotoListViewController,
+               sender: Any?)
 }
 
-class PhotoListView: UIViewController, UITableViewDataSource,
+class PhotoListViewController: UIViewController, UITableViewDataSource,
     UITableViewDelegate, PhotoListPresenterOutput {
 
   @IBOutlet var tableView: UITableView!
   @IBOutlet var segmentedControl: UISegmentedControl!
-  var output: PhotoListViewOutput!
-  var router: PhotoListViewRouter!
+  var output: PhotoListViewControllerOutput!
+  var router: PhotoListViewControllerRouter!
   
   enum State {
     case starting
-    case loadingPhotoItems
-    case showingPhotoCells([PhotoCellItem])
+    case loadingPhotoListCellItems
+    case showingPhotoListCellItems([PhotoListCellItem])
     case showingFailure
   }
   private var state: State = .starting {
@@ -46,18 +47,25 @@ class PhotoListView: UIViewController, UITableViewDataSource,
   
   private func loadPhotoCellItems() {
     let index = segmentedControl.selectedSegmentIndex
-    let title = segmentedControl.titleForSegment(at: index)!
-    let category = PhotoCellItemCategory(rawValue: title)!
-    state = .loadingPhotoItems
-    output.loadPhotoCellItems(category: category)
+    let categoryString = segmentedControl.titleForSegment(at: index)!
+    switch categoryString {
+    case "Interesting":
+      output.loadInterestingPhotoListCellItems()
+    case "Recent":
+      output.loadRecentPhotoListCellItems()
+    default:
+      fatalError("Invalid title for segmented control")
+    }
+    state = .loadingPhotoListCellItems
   }
   
   // MARK: View lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    // set up table view
+
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.estimatedRowHeight = 80
+    
     tableView.dataSource = self
     tableView.delegate = self
     
@@ -69,18 +77,19 @@ class PhotoListView: UIViewController, UITableViewDataSource,
     state = .showingFailure
   }
   
-  func showPhotoCells(_ photoCellItems: [PhotoCellItem]) {
-    state = .showingPhotoCells(photoCellItems)
+  func showPhotoListCells(_ photoListCellItems: [PhotoListCellItem]) {
+    state = .showingPhotoListCellItems(photoListCellItems)
   }
+
 
   // MARK: Table view data source
   func tableView(_ tableView: UITableView,
                  numberOfRowsInSection section: Int) -> Int {
     switch state {
-    case .loadingPhotoItems:
+    case .loadingPhotoListCellItems:
       return 1
-    case .showingPhotoCells(let photoCellItems):
-      return photoCellItems.count
+    case .showingPhotoListCellItems(let photoListCellItems):
+      return photoListCellItems.count
     case .showingFailure:
       return 1
     default:
@@ -91,13 +100,13 @@ class PhotoListView: UIViewController, UITableViewDataSource,
   func tableView(_ tableView: UITableView,
                  cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     switch state {
-    case .loadingPhotoItems:
+    case .loadingPhotoListCellItems:
       let cell = tableView.dequeueReusableCell(withIdentifier: "LoadingCell",
                                                for: indexPath)
       return cell
-    case .showingPhotoCells(let photoCellItems):
+    case .showingPhotoListCellItems(let photoCellItems):
       let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell",
-                                               for: indexPath) as! PhotoCell
+                                               for: indexPath) as! PhotoListCell
       let photoCellItem = photoCellItems[indexPath.row]
       cell.configure(with: photoCellItem)
       return cell
@@ -114,7 +123,7 @@ class PhotoListView: UIViewController, UITableViewDataSource,
   func tableView(_ tableView: UITableView,
                  willSelectRowAt indexPath: IndexPath) -> IndexPath? {
     switch state {
-    case .showingPhotoCells:
+    case .showingPhotoListCellItems:
       return indexPath
     case .starting:
       fatalError("\(#function) shouldn't be called here")
@@ -127,7 +136,7 @@ class PhotoListView: UIViewController, UITableViewDataSource,
                  didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     switch state {
-    case .showingPhotoCells(let items):
+    case .showingPhotoListCellItems(let items):
       router.showImage(from: self, for: items[indexPath.row])
     default:
       break
@@ -135,8 +144,8 @@ class PhotoListView: UIViewController, UITableViewDataSource,
   }
   
   // MARK: Navigation
-  override func prepare(`for` segue: UIStoryboardSegue, sender: Any?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: sender)
-    router.prepare(for: segue, from: self, with: sender)
+    router.prepare(for: segue, from: self, sender: sender)
   }
 }

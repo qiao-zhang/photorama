@@ -5,20 +5,16 @@
 
 import UIKit
 
-protocol PhotoCellPresenterOutput: class {
+protocol PhotoListCellPresenterOutput: class {
   func showImage(_ image: UIImage)
   func showFailure()
 }
 
-protocol FetchImageDataTask {
-  func cancel()
-}
-
-class PhotoCellPresenter: PhotoCellOutput {
-  unowned let output: PhotoCellPresenterOutput
+class PhotoListCellPresenter: PhotoListCellOutput {
+  unowned let output: PhotoListCellPresenterOutput
   var fetchImageDataTask: FetchImageDataTask?
   
-  init(output: PhotoCellPresenterOutput) {
+  init(output: PhotoListCellPresenterOutput) {
     self.output = output
   }
   

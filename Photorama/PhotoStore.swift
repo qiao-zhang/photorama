@@ -6,8 +6,9 @@
 import Foundation
 
 protocol PhotoRemoteDataSource {
-  func fetchPhotosAsync(category: PhotoCategory,
-                        completion: @escaping ([Photo]?) -> Void)
+  func fetchPhotosAsync(
+      category: PhotoCategory,
+      completion: @escaping (FetchPhotosResult) -> Void)
           -> FetchPhotosTask
 }
 
@@ -22,6 +23,17 @@ struct FetchPhotosURLSessionDataTask: FetchPhotosTask {
   }
 }
 
+enum FetchPhotosResult {
+  case success([Photo])
+  case failure(FetchPhotosError)
+}
+
+enum FetchPhotosError {
+  case requestFailed(Error)
+  case jsonWrongFormat
+}
+
+
 class PhotoStore {
   
   static let shared = PhotoStore()
@@ -29,12 +41,13 @@ class PhotoStore {
   
   private let remotePhotoDataSource: PhotoRemoteDataSource = FlickrAPI.shared
   
-  func fetchPhotosAsync(category: PhotoCategory,
-                        completion: @escaping ([Photo]?) -> Void)
+  func fetchPhotosAsync(
+      category: PhotoCategory,
+      completion: @escaping (FetchPhotosResult) -> Void)
           -> FetchPhotosTask? {
-    let task = remotePhotoDataSource.fetchPhotosAsync (category: category) {
-      photos in
-      completion(photos)
+    let task = remotePhotoDataSource.fetchPhotosAsync(category: category) {
+      result in
+      completion(result)
     }
     return task
   }
