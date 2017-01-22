@@ -5,8 +5,9 @@
 
 import UIKit
 
-protocol ImageViewOutput {
+protocol ImageViewControllerOutput {
   func loadImage(url: URL)
+  func cancelLoadingImage()
 }
 
 struct ImageViewItem {
@@ -17,7 +18,7 @@ struct ImageViewItem {
 class ImageViewController: UIViewController, ImagePresenterOutput {
   @IBOutlet weak var imageView: UIImageView!
   var item: ImageViewItem!
-  var output: ImageViewOutput!
+  var output: ImageViewControllerOutput!
 
   override func viewDidLoad() {
     super.viewDidLoad()

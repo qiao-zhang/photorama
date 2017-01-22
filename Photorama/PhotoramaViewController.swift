@@ -6,18 +6,13 @@
 import Foundation
 import UIKit
 
-protocol PhotoramaViewRouter: class {
-  func prepare(for segue: UIStoryboardSegue,
-               from _: PhotoramaViewController,
-               sender: Any?)
-}
 
 class PhotoramaViewController: UITableViewController {
-  var router: PhotoramaViewRouter!
+  var router: PhotoramaRouter!
   
   // MARK: Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: sender)
-    router.prepare(for: segue, from: self, sender: sender)
+    router.prepare(for: segue, sender: sender)
   }
 }

@@ -20,8 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
     let navController = window!.rootViewController as! UINavigationController
-    let photoramaView = navController.topViewController as! PhotoramaViewController
-    photoramaView.router = Router.shared
+    let photoramaViewController =
+        navController.topViewController as! PhotoramaViewController
+    photoramaViewController.router = PhotoramaRouterImp()
 
     return true
   }

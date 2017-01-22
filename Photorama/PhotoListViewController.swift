@@ -13,21 +13,13 @@ protocol PhotoListViewControllerOutput {
   func loadRecentPhotoListCellItems()
 }
 
-protocol PhotoListViewControllerRouter {
-  func showImage(from photoListViewController: PhotoListViewController,
-                 for photoTableViewCellItem: PhotoListCellItem)
-  func prepare(for segue: UIStoryboardSegue,
-               from _: PhotoListViewController,
-               sender: Any?)
-}
-
 class PhotoListViewController: UIViewController, UITableViewDataSource,
     UITableViewDelegate, PhotoListPresenterOutput {
 
   @IBOutlet var tableView: UITableView!
   @IBOutlet var segmentedControl: UISegmentedControl!
   var output: PhotoListViewControllerOutput!
-  var router: PhotoListViewControllerRouter!
+  var router: PhotoListRouter!
   
   enum State {
     case starting
@@ -47,11 +39,11 @@ class PhotoListViewController: UIViewController, UITableViewDataSource,
   
   private func loadPhotoCellItems() {
     let index = segmentedControl.selectedSegmentIndex
-    let categoryString = segmentedControl.titleForSegment(at: index)!
+    let categoryString = segmentedControl.titleForSegment(at: index)
     switch categoryString {
-    case "Interesting":
+    case "Interesting"?:
       output.loadInterestingPhotoListCellItems()
-    case "Recent":
+    case "Recent"?:
       output.loadRecentPhotoListCellItems()
     default:
       fatalError("Invalid title for segmented control")
@@ -107,6 +99,7 @@ class PhotoListViewController: UIViewController, UITableViewDataSource,
     case .showingPhotoListCellItems(let photoCellItems):
       let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell",
                                                for: indexPath) as! PhotoListCell
+      if cell.output == nil { router.wireup(cell) }
       let photoCellItem = photoCellItems[indexPath.row]
       cell.configure(with: photoCellItem)
       return cell
@@ -142,10 +135,17 @@ class PhotoListViewController: UIViewController, UITableViewDataSource,
       break
     }
   }
-  
+
+//  func tableView(_ tableView: UITableView,
+//                 didEndDisplaying cell: UITableViewCell,
+//                 forRowAt indexPath: IndexPath) {
+//    guard let cell = cell as? PhotoListCell else { return }
+//    cell.output.cancelLoadingImage()
+//  }
+
   // MARK: Navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     super.prepare(for: segue, sender: sender)
-    router.prepare(for: segue, from: self, sender: sender)
+    router.prepare(for: segue, sender: sender)
   }
 }

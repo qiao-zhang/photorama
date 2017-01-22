@@ -24,6 +24,8 @@ class PhotoListPresenter: PhotosInteractorOutput {
       handlePhotos(photos)
     case .failure(let error):
       handleFailure(error: error)
+    case .cancellation:
+      break
     }
   }
   
@@ -31,11 +33,15 @@ class PhotoListPresenter: PhotosInteractorOutput {
     let photoListCellItems: [PhotoListCellItem] = photos.map {
       PhotoListCellItem(title: $0.title, imageURL: $0.remoteURL)
     }
-    output.showPhotoListCells(photoListCellItems)
+    OperationQueue.main.addOperation { [weak self] in
+      self?.output.showPhotoListCells(photoListCellItems)
+    }
   }
   
   private func handleFailure(error: FetchPhotosError) {
-    output.showFailure()
+    OperationQueue.main.addOperation { [weak self] in
+      self?.output.showFailure()
+    }
   }
   
 }

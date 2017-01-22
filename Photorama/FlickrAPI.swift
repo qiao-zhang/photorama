@@ -74,18 +74,19 @@ extension FlickrAPI: PhotoRemoteDataSource {
       url = recentPhotosURL
     }
     let request = URLRequest(url: url)
-    let task = session.dataTask(with: request) { data, response, error in
+    let task = session.dataTask(with: request) {
+      [unowned self] (data, response, error) -> Void in
       
+      let result: FetchPhotosResult
       if let error = error {
-        return completion(.failure(.requestFailed(error)))
+        result = .failure(.requestFailed(error))
+      } else if let jsonData = data,
+                let photos = self.photos(fromJSON: jsonData) {
+        result = .success(photos)
+      } else {
+        result = .failure(.jsonWrongFormat)
       }
-      
-      let jsonData = data!
-      
-      if let photos = self.photos(fromJSON: jsonData) {
-        return completion(.success(photos))
-      }
-      return completion(.failure(.jsonWrongFormat))
+      completion(result)
     }
     task.resume()
     return FetchPhotosURLSessionDataTask(task: task)
@@ -127,11 +128,21 @@ extension FlickrAPI: PhotoRemoteDataSource {
 extension FlickrAPI: ImageDataRemoteDataSource {
   func fetchImageDataAsync(
       url: URL,
-      completion: @escaping (Data?) -> Void) -> FetchImageDataTask? {
+      completion: @escaping (FetchImageDataResult) -> Void)
+          -> FetchImageDataTask? {
     let request = URLRequest(url: url)
     let task = session.dataTask(with: request) { data, response, error in
-      guard let data = data else { return }
-      completion(data)
+      let result: FetchImageDataResult
+      if let data = data {
+        result = .success(data)
+      } else if let error = error as? NSError,
+                error.domain == NSURLErrorDomain,
+                error.code == NSURLErrorCancelled {
+        result = .cancellation
+      } else {
+        result = .failure
+      }
+      completion(result)
     }
     task.resume()
     return FetchImageURLSessionDataTask(task: task)

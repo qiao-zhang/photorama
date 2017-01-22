@@ -22,7 +22,8 @@ class PhotoListRouterImp: PhotoListRouter {
                                        payload: Any?) {
     let imageViewController = segue.destination as! ImageViewController
     let imagePresenter = ImagePresenter(output: imageViewController)
-    imageViewController.output = imagePresenter
+    let imageDataInteractor = ImageDataInteractor(output: imagePresenter)
+    imageViewController.output = imageDataInteractor
     let photoListCellItem = payload as! PhotoListCellItem
     let imageViewItem = ImageViewItem(imageViewTitle: photoListCellItem.title,
                                       imageURL: photoListCellItem.imageURL)
@@ -47,7 +48,8 @@ class PhotoListRouterImp: PhotoListRouter {
   }
 
   func wireup(_ cell: PhotoListCell) {
-    cell.output = ImageDataInteractor()
+    let presenter = ImagePresenter(output: cell)
+    cell.output = ImageDataInteractor(output: presenter)
   }
 
 }

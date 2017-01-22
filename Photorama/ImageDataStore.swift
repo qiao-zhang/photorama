@@ -8,7 +8,7 @@ import UIKit.UIImage
 protocol ImageDataRemoteDataSource {
   func fetchImageDataAsync(
       url: URL,
-      completion: @escaping (Data?) -> Void) -> FetchImageDataTask?
+      completion: @escaping (FetchImageDataResult) -> Void) -> FetchImageDataTask?
 }
 
 protocol FetchImageDataTask {
@@ -22,6 +22,12 @@ struct FetchImageURLSessionDataTask: FetchImageDataTask {
   }
 }
 
+enum FetchImageDataResult {
+  case success(Data)
+  case failure
+  case cancellation
+}
+
 class ImageDataStore {
   static let shared = ImageDataStore()
   private init() {}
@@ -30,19 +36,22 @@ class ImageDataStore {
   private let remoteImageDataSource: ImageDataRemoteDataSource =
       FlickrAPI.shared
   
-  func loadImageDataAsync(url: URL, completion: @escaping (Data?) -> Void)
+  func fetchImageDataAsync(
+      url: URL,
+      completion: @escaping (FetchImageDataResult) -> Void)
           -> FetchImageDataTask? {
-    let cached = cache.object(forKey: url as NSURL)
-    if let imageData = cached {
-      completion(imageData as Data)
+    
+    if let imageData = cache.object(forKey: url as NSURL) {
+      completion(.success(imageData as Data))
       return nil
     }
+    
     let task = remoteImageDataSource.fetchImageDataAsync(url: url) {
-      [unowned self] imageData in
-      if let imageData = imageData {
+      [unowned self] result in
+      if case .success(let imageData) = result {
         self.cache.setObject(imageData as NSData, forKey: url as NSURL)
       }
-      completion(imageData)
+      completion(result)
     }
     return task
   }

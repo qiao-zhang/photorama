@@ -11,6 +11,7 @@ protocol PhotoGridRouter {
 
 class PhotoGridRouterImp: PhotoGridRouter {
   func wireup(_ cell: PhotoGridCell) {
-    cell.output = ImageDataInteractor()
+    let presenter = ImagePresenter(output: cell)
+    cell.output = ImageDataInteractor(output: presenter)
   }
 }

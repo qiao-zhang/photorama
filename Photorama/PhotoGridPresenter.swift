@@ -24,6 +24,8 @@ class PhotoGridPresenter: PhotosInteractorOutput {
       handlePhotos(photos)
     case .failure(let error):
       handleFailure(error: error)
+    case .cancellation:
+      break
     }
   }
   
@@ -31,10 +33,14 @@ class PhotoGridPresenter: PhotosInteractorOutput {
     let photoGridCellItems: [PhotoGridCellItem] = photos.map {
       PhotoGridCellItem(title: $0.title, imageURL: $0.remoteURL)
     }
-    output.showPhotoGridCells(photoGridCellItems)
+    OperationQueue.main.addOperation { [weak self] in
+      self?.output.showPhotoGridCells(photoGridCellItems)
+    }
   }
   
   private func handleFailure(error: FetchPhotosError) {
-    output.showFailure()
+    OperationQueue.main.addOperation { [weak self] in
+      self?.output.showFailure()
+    }
   }
 }

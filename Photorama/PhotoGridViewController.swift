@@ -24,6 +24,7 @@ class PhotoGridViewController: UIViewController, PhotoGridPresenterOutput,
   @IBOutlet weak var collectionView: UICollectionView!
   var photoGridDataSource: (PhotoGridDataSource & UICollectionViewDataSource)!
   var output: PhotoGridViewControllerOutput!
+  var router: PhotoGridRouter!
   
   enum State {
     case starting
@@ -35,7 +36,7 @@ class PhotoGridViewController: UIViewController, PhotoGridPresenterOutput,
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView.dataSource = self
-    output.loadInterestingPhotoGridCellItems()
+//    output.loadInterestingPhotoGridCellItems()
   }
 
   func showPhotoGridCells(_ photoGridCellItems: [PhotoGridCellItem]) {
@@ -57,11 +58,12 @@ class PhotoGridViewController: UIViewController, PhotoGridPresenterOutput,
   func collectionView(
       _ collectionView: UICollectionView,
       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let identifier = "PhotoGridCell"
     let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: identifier,
-        for: indexPath)
+        withReuseIdentifier: PhotoGridCell.identifier,
+        for: indexPath) as! PhotoGridCell
+    if cell.output == nil {
+      router.wireup(cell)
+    }
     return cell
   }
-
 }

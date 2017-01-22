@@ -26,6 +26,7 @@ struct FetchPhotosURLSessionDataTask: FetchPhotosTask {
 enum FetchPhotosResult {
   case success([Photo])
   case failure(FetchPhotosError)
+  case cancellation
 }
 
 enum FetchPhotosError {

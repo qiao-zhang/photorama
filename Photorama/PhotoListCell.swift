@@ -7,6 +7,7 @@ import UIKit
 
 protocol PhotoListCellOutput {
   func loadImage(url: URL)
+  func cancelLoadingImage()
 }
 
 struct PhotoListCellItem {
@@ -14,33 +15,28 @@ struct PhotoListCellItem {
   let imageURL: URL
 }
 
-class PhotoListCell: UITableViewCell, PhotoListCellPresenterOutput {
+class PhotoListCell: UITableViewCell, ImagePresenterOutput {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var thumbnail: UIImageView!
   @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
   var output: PhotoListCellOutput!
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    output = PhotoListCellPresenter(output: self)
-  }
-
-  func configure(with photoTableViewCellItem: PhotoListCellItem) {
-    titleLabel.text = photoTableViewCellItem.title
-    output.loadImage(url: photoTableViewCellItem.imageURL)
+  func configure(with photoListCellItem: PhotoListCellItem) {
+    titleLabel.text = photoListCellItem.title
+    output.loadImage(url: photoListCellItem.imageURL)
     thumbnail.image = nil
-    activityIndicatorView.isHidden = false
     activityIndicatorView.startAnimating()
   }
 
   func showImage(_ image: UIImage) {
-    activityIndicatorView.isHidden = true
+    activityIndicatorView.stopAnimating()
     thumbnail.image = image
   }
-
-  func showFailure() {
-    thumbnail.image = nil
-    thumbnail.backgroundColor = UIColor.darkGray
-    activityIndicatorView.isHidden = true
-  }
+  
+//  override func prepareForReuse() {
+//    super.prepareForReuse()
+//    output.cancelLoadingImage()
+//    activityIndicatorView.stopAnimating()
+//    thumbnail.image = nil
+//  }
 }

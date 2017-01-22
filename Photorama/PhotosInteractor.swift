@@ -25,9 +25,7 @@ class PhotosInteractor {
       
       guard let strongSelf = self else { return }
       
-      OperationQueue.main.addOperation {
-        strongSelf.output.process(result)
-      }
+      strongSelf.output.process(result)
     }
   }
 }
