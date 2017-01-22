@@ -99,8 +99,13 @@ class PhotoGridViewController: UIViewController, PhotoGridPresenterOutput,
     if cell.output == nil {
       router.wireup(cell)
     }
-    let item = items[indexPath.row]
-    cell.configure(with: item)
+    cell.item = items[indexPath.row]
     return cell
+  }
+  
+  // MARK: Navigation
+  override func prepare(`for` segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
+    router.prepare(for: segue, sender: sender)
   }
 }

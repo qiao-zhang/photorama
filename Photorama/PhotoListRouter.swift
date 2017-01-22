@@ -5,7 +5,8 @@
 
 import UIKit.UIStoryboardSegue
 
-protocol PhotoListRouter {
+
+protocol PhotoListRouter: RouterAbleToShowImageViewCOntroller {
   func showImage(from photoListViewController: PhotoListViewController,
                  for photoTableViewCellItem: PhotoListCellItem)
   func prepare(for segue: UIStoryboardSegue,
@@ -18,18 +19,6 @@ class PhotoListRouterImp: PhotoListRouter {
     return "ShowImageViewController"
   }
 
-  private func showImageViewController(for segue: UIStoryboardSegue,
-                                       payload: Any?) {
-    let imageViewController = segue.destination as! ImageViewController
-    let imagePresenter = ImagePresenter(output: imageViewController)
-    let imageDataInteractor = ImageDataInteractor(output: imagePresenter)
-    imageViewController.output = imageDataInteractor
-    let photoListCellItem = payload as! PhotoListCellItem
-    let imageViewItem = ImageViewItem(imageViewTitle: photoListCellItem.title,
-                                      imageURL: photoListCellItem.imageURL)
-    imageViewController.item = imageViewItem
-  }
-  
   func showImage(from photoListView: PhotoListViewController,
                  for photoListCellItem: PhotoListCellItem) {
     photoListView.performSegue(
@@ -41,7 +30,10 @@ class PhotoListRouterImp: PhotoListRouter {
                sender: Any?) {
     switch segue.identifier {
     case identifierForShowingImageViewController?:
-      showImageViewController(for: segue, payload: sender)
+      let photoListCellItem = sender as! PhotoListCellItem
+      let imageViewItem = ImageViewItem(imageViewTitle: photoListCellItem.title,
+                                        imageURL: photoListCellItem.imageURL)
+      showImageViewController(for: segue, item: imageViewItem)
     default:
       fatalError("Invalid segue identifier")
     }

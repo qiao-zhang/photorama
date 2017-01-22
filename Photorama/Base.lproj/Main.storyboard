@@ -199,7 +199,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bPA-ge-EZf" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="80a-Wm-jqf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="80a-Wm-jqf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -348,6 +348,7 @@
                                         <connections>
                                             <outlet property="imageView" destination="TeT-lS-waW" id="mml-x8-oyc"/>
                                             <outlet property="spinner" destination="j4R-nR-iqT" id="Faj-W9-PER"/>
+                                            <segue destination="NUT-B2-45x" kind="show" identifier="ToImageViewControllerFromPhotoGridViewController" id="0LI-jS-u15"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -367,7 +368,6 @@
                     <connections>
                         <outlet property="collectionView" destination="Mbk-m1-6kK" id="Q2F-aW-uUO"/>
                         <outlet property="segmentedControl" destination="fZs-TG-9QW" id="dpH-jY-TvH"/>
-                        <segue destination="NUT-B2-45x" kind="show" identifier="ShowImageViewController" id="Fwx-qh-k6K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bCZ-WN-bp9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -376,6 +376,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Fwx-qh-k6K"/>
+        <segue reference="0LI-jS-u15"/>
     </inferredMetricsTieBreakers>
 </document>

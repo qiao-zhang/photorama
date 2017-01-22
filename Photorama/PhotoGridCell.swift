@@ -13,15 +13,16 @@ protocol PhotoGridCellOutput {
 class PhotoGridCell: UICollectionViewCell, ImagePresenterOutput {
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var spinner: UIActivityIndicatorView!
+  var item: PhotoGridCellItem! {
+    didSet {
+      output.loadImage(url: item.imageURL)
+      imageView.image = nil
+      spinner.startAnimating()
+    }
+  }
   var output: PhotoGridCellOutput!
   
   static let identifier = "PhotoGridCell"
-
-  func configure(with photoGridCellItem: PhotoGridCellItem) {
-    output.loadImage(url: photoGridCellItem.imageURL)
-    spinner.startAnimating()
-    imageView.image = nil
-  }
 
   override func prepareForReuse() {
     super.prepareForReuse()
