@@ -366,6 +366,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Mbk-m1-6kK" id="Q2F-aW-uUO"/>
+                        <outlet property="segmentedControl" destination="fZs-TG-9QW" id="dpH-jY-TvH"/>
                         <segue destination="NUT-B2-45x" kind="show" identifier="ShowImageViewController" id="Fwx-qh-k6K"/>
                     </connections>
                 </viewController>
@@ -375,6 +376,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Y1n-BD-1Rt"/>
+        <segue reference="Fwx-qh-k6K"/>
     </inferredMetricsTieBreakers>
 </document>

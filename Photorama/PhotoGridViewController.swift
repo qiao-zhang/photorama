@@ -22,6 +22,7 @@ protocol PhotoGridViewControllerOutput {
 class PhotoGridViewController: UIViewController, PhotoGridPresenterOutput,
     UICollectionViewDataSource {
   @IBOutlet weak var collectionView: UICollectionView!
+  @IBOutlet weak var segmentedControl: UISegmentedControl!
   var photoGridDataSource: (PhotoGridDataSource & UICollectionViewDataSource)!
   var output: PhotoGridViewControllerOutput!
   var router: PhotoGridRouter!
@@ -29,41 +30,77 @@ class PhotoGridViewController: UIViewController, PhotoGridPresenterOutput,
   enum State {
     case starting
     case loadingPhotoGridCellItems
-    case showingPhotoGridCellItems
+    case showingPhotoGridCellItems([PhotoGridCellItem])
     case showingFailure
   }
+  private var state: State = .starting {
+    didSet {
+      collectionView.reloadData()
+    }
+  }
+  
+  @IBAction func segmentedControlChanged() {
+    loadPhotoCellItems()
+  }
+  
+  private func loadPhotoCellItems() {
+    let index = segmentedControl.selectedSegmentIndex
+    let categoryString = segmentedControl.titleForSegment(at: index)
+    switch categoryString {
+    case "Interesting"?:
+      output.loadInterestingPhotoGridCellItems()
+    case "Recent"?:
+      output.loadRecentPhotoGridCellItems()
+    default:
+      fatalError("Invalid title for segmented control")
+    }
+    state = .loadingPhotoGridCellItems
+  }
 
+  // MARK: View lifecycle
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView.dataSource = self
-//    output.loadInterestingPhotoGridCellItems()
+    loadPhotoCellItems()
   }
 
   func showPhotoGridCells(_ photoGridCellItems: [PhotoGridCellItem]) {
-    photoGridDataSource.setPhotoItems(photoGridCellItems)
-    collectionView.reloadData()
+//    photoGridDataSource.setPhotoItems(photoGridCellItems)
+    state = .showingPhotoGridCellItems(photoGridCellItems)
   }
 
   func showFailure() {
-    photoGridDataSource.setPhotoItems([])
-    collectionView.reloadData()
+//    photoGridDataSource.setPhotoItems([])
+    state = .showingFailure
   }
   
   // MARK: UICollectionViewDataSource
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return 3
+    switch state {
+    case .showingPhotoGridCellItems(let items):
+      return items.count
+    case .starting:
+      fatalError("\(#function) shouldn't be called here")
+    default:
+      return 0
+    }
   }
 
   func collectionView(
       _ collectionView: UICollectionView,
       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    guard case .showingPhotoGridCellItems(let items) = state else {
+      fatalError("\(#function) shouldn't be called here")
+    }
     let cell = collectionView.dequeueReusableCell(
         withReuseIdentifier: PhotoGridCell.identifier,
         for: indexPath) as! PhotoGridCell
     if cell.output == nil {
       router.wireup(cell)
     }
+    let item = items[indexPath.row]
+    cell.configure(with: item)
     return cell
   }
 }
