@@ -24,24 +24,24 @@ enum FetchImageDataFailureReason: Error {
   case other(Error)
 }
 
-class ImageDataInteractor: ImageDataInteractorInput {
-  var fetchImageDataTask: FetchImageDataTask?
-  let output: ImageDataInteractorOutput
+protocol FetchImageDataService {
+  func cancelCurrentFetching()
+  func fetchImageDataAsync(of url: URL,
+                           completion: @escaping (FetchImageDataResult) -> Void)
+}
 
-  init(output: ImageDataInteractorOutput) {
-    self.output = output
-  }
+class ImageDataInteractor: ImageDataInteractorInput {
+  var fetchImageDataService: FetchImageDataService?
+  var output: ImageDataInteractorOutput?
 
   func fetchImageData(of url: URL) {
-    fetchImageDataTask?.cancel()
-
-    fetchImageDataTask = ImageDataStore.shared.fetchImageDataAsync(url: url) {
-      [weak self] result in
-      self?.output.doneFetchingImageData(result: result)
+    fetchImageDataService?.cancelCurrentFetching()
+    fetchImageDataService?.fetchImageDataAsync(of: url) { [weak self] result in
+      self?.output?.doneFetchingImageData(result: result)
     }
   }
 
   func cancelFetchingImageData() {
-    fetchImageDataTask?.cancel()
+    fetchImageDataService?.cancelCurrentFetching()
   }
 }
