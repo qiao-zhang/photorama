@@ -6,10 +6,25 @@
 import Foundation
 
 protocol ImageDataInteractorOutput {
-  func imageDataFetched(_ imageData: Data?)
+  func doneFetchingImageData(result: FetchImageDataResult)
 }
 
-class ImageDataInteractor {
+protocol ImageDataInteractorInput {
+  func fetchImageData(of url: URL)
+  func cancelFetchingImageData()
+}
+
+enum FetchImageDataResult {
+  case success(Data)
+  case failure(FetchImageDataFailureReason)
+}
+
+enum FetchImageDataFailureReason: Error {
+  case cancelled
+  case other(Error)
+}
+
+class ImageDataInteractor: ImageDataInteractorInput {
   var fetchImageDataTask: FetchImageDataTask?
   let output: ImageDataInteractorOutput
 
@@ -17,34 +32,16 @@ class ImageDataInteractor {
     self.output = output
   }
 
-  fileprivate func fetchImageData(url: URL) {
+  func fetchImageData(of url: URL) {
     fetchImageDataTask?.cancel()
 
     fetchImageDataTask = ImageDataStore.shared.fetchImageDataAsync(url: url) {
       [weak self] result in
-      guard let strongSelf = self else {
-        return
-      }
-      switch result {
-      case .success(let imageData):
-        strongSelf.output.imageDataFetched(imageData)
-      case .failure:
-        strongSelf.output.imageDataFetched(nil)
-      case .cancellation:
-        break
-      }
+      self?.output.doneFetchingImageData(result: result)
     }
   }
-}
 
-extension ImageDataInteractor: PhotoGridCellOutput, PhotoListCellOutput,
-    ImageViewControllerOutput {
-  func loadImage(url: URL) {
-    fetchImageData(url: url)
-  }
-
-  func cancelLoadingImage() {
+  func cancelFetchingImageData() {
     fetchImageDataTask?.cancel()
-    fetchImageDataTask = nil
   }
 }
