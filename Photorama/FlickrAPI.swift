@@ -6,9 +6,6 @@
 import Foundation
 
 class FlickrAPI {
-  static let shared = FlickrAPI()
-  private init() {
-  }
   
   fileprivate static let baseURLString = "https://api.flickr.com/services/rest"
   fileprivate static let apiKey = "a6d819499131071f158fd740860a5a88"
@@ -18,12 +15,15 @@ class FlickrAPI {
     case recentPhotos = "flickr.photos.getRecent"
   }
   
-  fileprivate let session: URLSession = {
-    let config = URLSessionConfiguration.default
-    return URLSession(configuration: config)
-  }()
+  static var interestingPhotosURL: URL {
+    return flickrURL(method: .interestingPhotos)
+  }
+
+  static var recentPhotosURL: URL {
+    return flickrURL(method: .recentPhotos)
+  }
   
-  fileprivate func flickrURL(
+  private static func flickrURL(
       method: Method,
       parameters: [String: String]? = ["extras": "url_h,date_taken"]) -> URL {
     var components = URLComponents(string: FlickrAPI.baseURLString)!
@@ -45,107 +45,4 @@ class FlickrAPI {
     components.queryItems = queryItems
     return components.url!
   }
-  
-  fileprivate let dateFormatter: DateFormatter = {
-    let df = DateFormatter()
-    df.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    return df
-  }()
-}
-  
-extension FlickrAPI: PhotoRemoteDataSource {
-  
-  private var interestingPhotosURL: URL {
-    return flickrURL(method: .interestingPhotos)
-  }
-  
-  private var recentPhotosURL: URL {
-    return flickrURL(method: .recentPhotos)
-  }
-
-  func fetchPhotosAsync(category: PhotoCategory,
-                        completion: @escaping (FetchPhotosResult) -> Void)
-          -> FetchPhotosTask {
-    let url: URL
-    switch category {
-    case .interesting:
-      url = interestingPhotosURL
-    case .recent:
-      url = recentPhotosURL
-    }
-    let request = URLRequest(url: url)
-    let task = session.dataTask(with: request) {
-      [unowned self] (data, response, error) -> Void in
-      
-      let result: FetchPhotosResult
-      if let error = error {
-        result = .failure(.requestFailed(error))
-      } else if let jsonData = data,
-                let photos = self.photos(fromJSON: jsonData) {
-        result = .success(photos)
-      } else {
-        result = .failure(.jsonWrongFormat)
-      }
-      completion(result)
-    }
-    task.resume()
-    return FetchPhotosURLSessionDataTask(task: task)
-  }
-  
-  private func photos(fromJSON data: Data) -> [Photo]? {
-    guard
-        let jsonObject = try? JSONSerialization.jsonObject(with: data,
-                                                           options: []),
-        let jsonDict = jsonObject as? [AnyHashable: Any],
-        let photosDict = jsonDict["photos"] as? [String: Any],
-        let photosArray = photosDict["photo"] as? [[String: Any]] else {
-      return nil
-    }
-    
-    let photos = photosArray.flatMap {
-      photo(fromJSON: $0)
-    }
-    
-    if photos.isEmpty && !photosArray.isEmpty { return nil }
-    
-    return photos
-  }
-  
-  private func photo(fromJSON json: [String: Any]) -> Photo? {
-    guard let photoID = json["id"] as? String,
-        let title = json["title"] as? String,
-        let urlString = json["url_h"] as? String,
-        let url = URL(string: urlString),
-        let dateString = json["datetaken"] as? String,
-        let dateTaken = dateFormatter.date(from:dateString) else {
-      return nil
-    }
-    return Photo(title: title, remoteURL: url,
-                 photoID: photoID, dataTaken: dateTaken)
-  }
-}
-
-extension FlickrAPI: ImageDataRemoteDataSource {
-  func fetchImageDataAsync(
-      url: URL,
-      completion: @escaping (FetchImageDataResult) -> Void)
-          -> FetchImageDataTask? {
-    let request = URLRequest(url: url)
-    let task = session.dataTask(with: request) { data, response, error in
-      let result: FetchImageDataResult
-      if let data = data {
-        result = .success(data)
-      } else if let error = error as? NSError,
-                error.domain == NSURLErrorDomain,
-                error.code == NSURLErrorCancelled {
-        result = .cancellation
-      } else {
-        result = .failure
-      }
-      completion(result)
-    }
-    task.resume()
-    return FetchImageURLSessionDataTask(task: task)
-  }
-
 }
