@@ -6,46 +6,42 @@
 import Foundation
 
 protocol PhotosInteractorOutput {
-  func process(_ result: FetchPhotosResult)
+  func doneFetchingPhotos(result: FetchPhotosResult)
 }
 
+protocol PhotosInteractor {
+  func fetchPhotos(of category: PhotoCategory) 
+  func cancelFetchingPhotos()
+}
 
-class PhotosInteractor {
-  var output: PhotosInteractorOutput
-  private var fetchPhotosTask: FetchPhotosTask?
+enum FetchPhotosResult {
+  case success([Photo])
+  case failure(FetchPhotosError)
+}
 
-  init(output: PhotosInteractorOutput) {
-    self.output = output
-  }
+enum FetchPhotosError {
+  case cancelled
+  case other(Error)
+}
 
-  func fetchPhotos(category: PhotoCategory) {
-    fetchPhotosTask?.cancel()
-    fetchPhotosTask = PhotoStore.shared.fetchPhotosAsync(
-        category: category) { [weak self] result in
-      
-      guard let strongSelf = self else { return }
-      
-      strongSelf.output.process(result)
+protocol FetchPhotosService {
+  func cancelCurrentFetching()
+  func fetchPhotosAsync(of category: PhotoCategory,
+                        completion: @escaping (FetchPhotosResult) -> Void)
+}
+
+class PhotosInteractorImp: PhotosInteractor {
+  var output: PhotosInteractorOutput?
+  var service: FetchPhotosService?
+
+  func fetchPhotos(of category: PhotoCategory) {
+    service?.cancelCurrentFetching()
+    service?.fetchPhotosAsync(of: category) { [weak self] result in
+      self?.output?.doneFetchingPhotos(result: result)
     }
   }
-}
 
-extension PhotosInteractor: PhotoListViewControllerOutput {
-  func loadInterestingPhotoListCellItems() {
-    fetchPhotos(category: .interesting)
-  }
-  
-  func loadRecentPhotoListCellItems() {
-    fetchPhotos(category: .recent)
-  }
-}
-
-extension PhotosInteractor: PhotoGridViewControllerOutput {
-  func loadInterestingPhotoGridCellItems() {
-    fetchPhotos(category: .interesting)
-  }
-
-  func loadRecentPhotoGridCellItems() {
-    fetchPhotos(category: .recent)
+  func cancelFetchingPhotos() {
+    service?.cancelCurrentFetching()
   }
 }
