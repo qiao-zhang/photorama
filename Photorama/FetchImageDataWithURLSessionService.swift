@@ -5,7 +5,7 @@
 
 import Foundation
 
-class FetchImageDataFromFlickrService: FetchImageDataService {
+class FetchImageDataWithURLSessionAPIService: FetchImageDataService {
   
   private var currentFetching: URLSessionDataTask?
   private let session: URLSession = {
