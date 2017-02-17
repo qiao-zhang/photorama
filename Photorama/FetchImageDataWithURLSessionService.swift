@@ -32,6 +32,7 @@ class FetchImageDataWithURLSessionAPIService: FetchImageDataService {
         }
         result = .failure(.other(error))
       }
+      completion(result)
     }
     currentFetching!.resume()
   }
