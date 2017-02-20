@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD1EB3A3DE187254E699313D /* ImageDataInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBFC1B6F968E8571CC7E1 /* ImageDataInteractor.swift */; };
+		DD1EB7185048413E4996B3F2 /* PhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB2673036DE4400B84B71 /* PhotosInteractor.swift */; };
+		DD1EBBB977B5DA5FE0A7F239 /* Photo+PhotoCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBBE6578536D2E40D9D85 /* Photo+PhotoCategory.swift */; };
 		E7D3D01B1E26B70200766514 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D3D01A1E26B70200766514 /* AppDelegate.swift */; };
 		E7D3D01D1E26B70200766514 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D3D01C1E26B70200766514 /* ViewController.swift */; };
 		E7D3D0201E26B70200766514 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D3D01E1E26B70200766514 /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD1EB2673036DE4400B84B71 /* PhotosInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosInteractor.swift; sourceTree = "<group>"; };
+		DD1EBBE6578536D2E40D9D85 /* Photo+PhotoCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+PhotoCategory.swift"; sourceTree = "<group>"; };
+		DD1EBFC1B6F968E8571CC7E1 /* ImageDataInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDataInteractor.swift; sourceTree = "<group>"; };
 		E7D3D0171E26B70200766514 /* Photorama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Photorama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7D3D01A1E26B70200766514 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7D3D01C1E26B70200766514 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +41,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD1EBAB6013D13B6818BA75D /* Domain Layer */ = {
+			isa = PBXGroup;
+			children = (
+				DD1EBFC1B6F968E8571CC7E1 /* ImageDataInteractor.swift */,
+				DD1EB2673036DE4400B84B71 /* PhotosInteractor.swift */,
+				DD1EBBE6578536D2E40D9D85 /* Photo+PhotoCategory.swift */,
+			);
+			path = "Domain Layer";
+			sourceTree = "<group>";
+		};
 		E7D3D00E1E26B70200766514 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +76,7 @@
 				E7D3D0211E26B70200766514 /* Assets.xcassets */,
 				E7D3D0231E26B70200766514 /* LaunchScreen.storyboard */,
 				E7D3D0261E26B70200766514 /* Info.plist */,
+				DD1EBAB6013D13B6818BA75D /* Domain Layer */,
 			);
 			path = Photorama;
 			sourceTree = "<group>";
@@ -139,6 +156,9 @@
 			files = (
 				E7D3D01D1E26B70200766514 /* ViewController.swift in Sources */,
 				E7D3D01B1E26B70200766514 /* AppDelegate.swift in Sources */,
+				DD1EB3A3DE187254E699313D /* ImageDataInteractor.swift in Sources */,
+				DD1EB7185048413E4996B3F2 /* PhotosInteractor.swift in Sources */,
+				DD1EBBB977B5DA5FE0A7F239 /* Photo+PhotoCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
