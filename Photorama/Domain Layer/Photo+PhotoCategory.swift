@@ -9,10 +9,12 @@ struct Photo {
   let title: String
   let remoteURL: URL
   let photoID: String
-  let dataTaken: Date
+  let dateTaken: Date
 }
 
 enum PhotoCategory {
   case interesting
   case recent
+  
+  static let allValues: [PhotoCategory] = [.interesting, .recent]
 }
