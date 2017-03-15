@@ -18,6 +18,7 @@
 		DD1EB3F996542C730A991A95 /* Assembler+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBA58A0E9FBB2F50EE29C /* Assembler+Router.swift */; };
 		DD1EB7185048413E4996B3F2 /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB2673036DE4400B84B71 /* PhotoManager.swift */; };
 		DD1EB7644D07ABB92AD849D6 /* PhotoGridPresenterImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB2DBC6D2069DAE406481 /* PhotoGridPresenterImp.swift */; };
+		DD1EB7873B9D4C4B4BB7406A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB8656AED8D3443B120A7 /* PhotoCollectionViewCell.swift */; };
 		DD1EB91F139044BA955880E0 /* PhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB8397C23962AF641F645 /* PhotoImageView.swift */; };
 		DD1EB9BF4438C224B7035799 /* PhotoListCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EBD5598D52586B0889771 /* PhotoListCells.swift */; };
 		DD1EB9DF8D9A8ECD7EC433D0 /* PhotoListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1EB4717DF05E846432249F /* PhotoListItem.swift */; };
@@ -44,6 +45,7 @@
 		DD1EB525F8C2240F97C042C0 /* PhotoListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoListPresenter.swift; sourceTree = "<group>"; };
 		DD1EB56AD2C333959FE8AA16 /* PhotoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoList.swift; sourceTree = "<group>"; };
 		DD1EB8397C23962AF641F645 /* PhotoImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoImageView.swift; sourceTree = "<group>"; };
+		DD1EB8656AED8D3443B120A7 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DD1EB91FB2E2FC78291C387F /* PhotoGrid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGrid.swift; sourceTree = "<group>"; };
 		DD1EB9A03106BC409532BA87 /* FetchImageDataWithURLSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchImageDataWithURLSessionService.swift; sourceTree = "<group>"; };
 		DD1EBA58A0E9FBB2F50EE29C /* Assembler+Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Assembler+Router.swift"; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				DD1EBF758D247B651E3BDE71 /* PhotoGridDataSource.swift */,
 				DD1EB37B5EBAAA5E2E2709C7 /* PhotoGridItem.swift */,
 				DD1EB91FB2E2FC78291C387F /* PhotoGrid.swift */,
+				DD1EB8656AED8D3443B120A7 /* PhotoCollectionViewCell.swift */,
 			);
 			path = PhotoGrid;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				DD1EBF20C096C29DA2BFB495 /* PhotoGridItem.swift in Sources */,
 				DD1EB06AD5BF4E09357BF95D /* PhotoGrid.swift in Sources */,
 				DD1EB7644D07ABB92AD849D6 /* PhotoGridPresenterImp.swift in Sources */,
+				DD1EB7873B9D4C4B4BB7406A /* PhotoCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,7 @@ class PhotoGridDataSource: NSObject, UICollectionViewDataSource {
     
     let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: "PhotoGridCell",
-      for: indexPath)
+      for: indexPath) as! PhotoGridCell
     return cell
   }
 

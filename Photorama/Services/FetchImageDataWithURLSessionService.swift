@@ -26,7 +26,9 @@ class FetchImageDataWithURLSessionAPIService: FetchImageDataRemotelyService {
           result = .failure(error)
         }
       }
-      completion(result)
+      OperationQueue.main.addOperation {
+        completion(result)
+      }
     }
     task.resume()
   }

@@ -42,6 +42,7 @@ class Assembler {
     let presenter = PhotoGridPresenterImp(
       view: photoGrid,
       photoManager: photoManager,
+      imageDataManager: imageDataManager,
       categoryName: categoryName)
     photoGrid.presenter = presenter
   }

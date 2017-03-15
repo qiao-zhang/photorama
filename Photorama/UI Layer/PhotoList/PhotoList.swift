@@ -123,4 +123,5 @@ extension PhotoListImp: UITableViewDelegate {
     let imageURL = items[indexPath.row].imageURL
     Router.showPhotoImageViewFrom(self, with: imageURL)
   }
+
 }

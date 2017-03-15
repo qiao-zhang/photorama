@@ -5,7 +5,12 @@
 
 import Foundation
 
-struct PhotoGridItem {
+struct PhotoGridItem: Equatable {
   let title: String
   let imageURL: URL
+  let id: String
+  
+  static func == (lhs: PhotoGridItem, rhs: PhotoGridItem) -> Bool {
+    return lhs.id == rhs.id
+  }
 }

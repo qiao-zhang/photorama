@@ -21,16 +21,21 @@ class FetchPhotosFromFlickrWithURLSessionService: FetchPhotosRemotelyService {
     let task = URLSession.shared.dataTask(with: request) {
       [unowned self] data, _, error in
       
+      let result: FetchPhotosResult
       if let jsonData = data,
          let photos = self.photos(fromJSON: jsonData) {
-        return completion(.success(photos))
-      }
-      if let error = error as? NSError {
-        if error.domain == NSURLErrorDomain,
-           error.code == NSURLErrorCancelled {
-          return completion(.cancelled)
+        result = .success(photos)
+      } else {
+        let error = error as! NSError
+        if error.domain == NSURLErrorDomain, error.code == NSURLErrorCancelled {
+          result = .cancelled
+        } else {
+          result = .failure(error)
         }
-        return completion(.failure(error))
+      }
+      
+      OperationQueue.main.addOperation {
+        completion(result)
       }
     }
     task.resume()

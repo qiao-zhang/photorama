@@ -29,7 +29,10 @@ class ImageDataManagerImp: ImageDataManager {
     of url: URL,
     completion: @escaping (FetchImageDataResult) -> Void) {
     if let data = imageDataCache.object(forKey: url as NSURL) {
-      return completion(.success(data as Data))
+      OperationQueue.main.addOperation {
+        completion(.success(data as Data))
+      }
+      return
     }
     service.fetchImageDataAsync(of: url) { [unowned self] result in
       if case .success(let data) = result {
