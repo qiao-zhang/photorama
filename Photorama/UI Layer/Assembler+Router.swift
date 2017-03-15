@@ -37,6 +37,14 @@ class Assembler {
     photoImageView.presenter = presenter
   }
   
+  static func assemble(_ photoGrid: PhotoGrid,
+                       with categoryName: String) {
+    let presenter = PhotoGridPresenterImp(
+      view: photoGrid,
+      photoManager: photoManager,
+      categoryName: categoryName)
+    photoGrid.presenter = presenter
+  }
 }
 
 class Router {
@@ -57,5 +65,13 @@ class Router {
       withIdentifier: "PhotoImageView")
     Assembler.assemble(piv as! PhotoImageView, with: imageURL)
     vc.show(piv, sender: nil)
+  }
+  
+  static func showPhotoGridFrom(_ vc: UIViewController,
+                                with categoryName: String) {
+    let pg = mainStoryBoard.instantiateViewController(
+      withIdentifier: "PhotoGrid")
+    Assembler.assemble(pg as! PhotoGrid, with: categoryName)
+    vc.show(pg, sender: nil)
   }
 }

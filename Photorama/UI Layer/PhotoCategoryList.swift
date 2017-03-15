@@ -56,6 +56,7 @@ extension PhotoCategoryListImp: UITableViewDelegate {
                  didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
     guard let categoryNames = categoryNames else { return }
-    Router.showPhotoListFrom(self, with: categoryNames[indexPath.row])
+//    Router.showPhotoListFrom(self, with: categoryNames[indexPath.row])
+    Router.showPhotoGridFrom(self, with: categoryNames[indexPath.row])
   }
 }

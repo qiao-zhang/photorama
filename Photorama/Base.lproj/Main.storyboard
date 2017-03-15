@@ -53,6 +53,8 @@
                     <navigationItem key="navigationItem" id="rcA-J7-Trl"/>
                     <connections>
                         <outlet property="tableView" destination="6E3-tf-gLU" id="izH-7v-LDn"/>
+                        <segue destination="enA-ea-PZl" kind="show" id="0qa-BW-LBi"/>
+                        <segue destination="jnO-AU-grC" kind="show" id="4Je-eb-MHX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hsL-34-2Ep" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -160,7 +162,62 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="25g-TR-P1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="701.60000000000002" y="-690.40479760119945"/>
+            <point key="canvasLocation" x="690" y="-1040"/>
+        </scene>
+        <!--Photo Grid Imp-->
+        <scene sceneID="mdS-Vk-bRK">
+            <objects>
+                <viewController storyboardIdentifier="PhotoGrid" id="jnO-AU-grC" customClass="PhotoGridImp" customModule="Photorama" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wQw-hM-B8S"/>
+                        <viewControllerLayoutGuide type="bottom" id="sRO-hE-4TS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mBG-vj-4Hs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="95t-Yi-dS6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="uoX-DB-PmA">
+                                    <size key="itemSize" width="90" height="90"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoGridCell" id="OEu-BO-z7M">
+                                        <rect key="frame" x="2" y="2" width="90" height="90"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Nfg-Yf-5LZ">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="95t-Yi-dS6" secondAttribute="bottom" id="254-lL-eem"/>
+                            <constraint firstItem="95t-Yi-dS6" firstAttribute="top" secondItem="mBG-vj-4Hs" secondAttribute="top" id="4x0-Jl-B8F"/>
+                            <constraint firstItem="95t-Yi-dS6" firstAttribute="leading" secondItem="mBG-vj-4Hs" secondAttribute="leading" id="J15-eA-cqD"/>
+                            <constraint firstAttribute="trailing" secondItem="95t-Yi-dS6" secondAttribute="trailing" id="vUt-zy-g4Z"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="95t-Yi-dS6" id="lGO-tE-bGC"/>
+                        <outlet property="spinner" destination="Nfg-Yf-5LZ" id="rtl-C3-r1i"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X0g-9P-375" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="690" y="-339"/>
         </scene>
         <!--Photo Image View Imp-->
         <scene sceneID="C5D-If-V8z">
@@ -198,7 +255,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zLA-4o-ZNX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1640.8" y="-690.40479760119945"/>
+            <point key="canvasLocation" x="1630" y="-1040"/>
         </scene>
     </scenes>
 </document>
